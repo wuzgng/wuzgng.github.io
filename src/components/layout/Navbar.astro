@@ -170,20 +170,6 @@ const actionClass =
 </header>
 
 <script define:vars={{ searchPosts }}>
-  const toggle = document.querySelector("[data-theme-toggle]");
-  const root = document.documentElement;
-  const storedTheme = localStorage.getItem("theme");
-  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-  if (storedTheme === "dark" || (!storedTheme && prefersDark)) {
-    root.classList.add("dark");
-  }
-
-  toggle?.addEventListener("click", () => {
-    const isDark = root.classList.toggle("dark");
-    localStorage.setItem("theme", isDark ? "dark" : "light");
-  });
-
   const searchToggle = document.querySelector("[data-search-toggle]");
   const searchRoot = document.querySelector("[data-search-root]");
   const searchPanel = document.querySelector("[data-search-panel]");

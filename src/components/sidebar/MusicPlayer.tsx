@@ -14,7 +14,38 @@ declare global {
   }
 }
 
+const STORAGE_KEY = "beihai-music-session";
 const BACKGROUND_VOLUME = 0.25;
+
+type MusicSession = {
+  trackIndex: number;
+  currentTime: number;
+  volume: number;
+  isPlaying: boolean;
+};
+
+const readMusicSession = (): MusicSession | null => {
+  try {
+    const raw = sessionStorage.getItem(STORAGE_KEY);
+    if (!raw) {
+      return null;
+    }
+
+    return JSON.parse(raw) as MusicSession;
+  } catch {
+    return null;
+  }
+};
+
+const writeMusicSession = (session: MusicSession) => {
+  try {
+    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(session));
+  } catch {
+    // Ignore storage failures in private mode or quota limits.
+  }
+};
+
+const getInitialSession = () => (typeof window === "undefined" ? null : readMusicSession());
 
 const musicSrc = (filename: string) => `/music/${encodeURIComponent(filename)}`;
 
@@ -130,13 +161,17 @@ const getAdaptiveTitleSize = (title: string, variant: "now-playing" | "playlist"
 };
 
 export default function MusicPlayer() {
+  const initialSession = useMemo(() => getInitialSession(), []);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const rangeRef = useRef<HTMLInputElement | null>(null);
   const hasAutoPlayedRef = useRef(false);
   const shouldAutoPlayRef = useRef(false);
-  const volumeRef = useRef(BACKGROUND_VOLUME);
-  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
-  const [volume, setVolume] = useState(BACKGROUND_VOLUME);
+  const shouldResumeRef = useRef(initialSession?.isPlaying ?? false);
+  const pendingSeekRef = useRef<number | null>(initialSession?.currentTime ?? null);
+  const isSeekingRef = useRef(false);
+  const volumeRef = useRef(initialSession?.volume ?? BACKGROUND_VOLUME);
+  const [currentTrackIndex, setCurrentTrackIndex] = useState(initialSession?.trackIndex ?? 0);
+  const [volume, setVolume] = useState(initialSession?.volume ?? BACKGROUND_VOLUME);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isReady, setIsReady] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -152,9 +187,23 @@ export default function MusicPlayer() {
     return Math.min((currentTime / duration) * 100, 100);
   }, [currentTime, duration]);
 
+  const persistSession = () => {
+    const audio = audioRef.current;
+    if (!audio) {
+      return;
+    }
+
+    writeMusicSession({
+      trackIndex: currentTrackIndex,
+      currentTime: audio.currentTime,
+      volume: volumeRef.current,
+      isPlaying: !audio.paused,
+    });
+  };
+
   useEffect(() => {
     const audio = new Audio(currentTrack.src);
-    audio.preload = "metadata";
+    audio.preload = "auto";
     audio.volume = volumeRef.current;
     audioRef.current = audio;
     setIsReady(false);
@@ -194,9 +243,23 @@ export default function MusicPlayer() {
       });
     };
 
-    const handleLoadedMetadata = () => {
+    const syncDuration = () => {
+      if (!Number.isFinite(audio.duration) || audio.duration <= 0) {
+        return;
+      }
+
       setDuration(audio.duration);
       setIsReady(true);
+    };
+
+    const handleLoadedMetadata = () => {
+      syncDuration();
+
+      if (pendingSeekRef.current !== null) {
+        audio.currentTime = pendingSeekRef.current;
+        setCurrentTime(pendingSeekRef.current);
+        pendingSeekRef.current = null;
+      }
 
       if (shouldAutoPlayRef.current) {
         shouldAutoPlayRef.current = false;
@@ -204,14 +267,27 @@ export default function MusicPlayer() {
         return;
       }
 
-      if (!hasAutoPlayedRef.current && currentTrackIndex === 0) {
+      if (shouldResumeRef.current) {
+        shouldResumeRef.current = false;
+        tryPlay();
+        return;
+      }
+
+      if (!hasAutoPlayedRef.current && currentTrackIndex === 0 && !initialSession) {
         hasAutoPlayedRef.current = true;
         tryPlay();
       }
     };
-    const handleTimeUpdate = () => setCurrentTime(audio.currentTime);
+    const handleTimeUpdate = () => {
+      if (isSeekingRef.current) {
+        return;
+      }
+
+      setCurrentTime(audio.currentTime);
+    };
     const handleEnded = () => {
       setCurrentTime(0);
+      pendingSeekRef.current = null;
       shouldAutoPlayRef.current = true;
       setCurrentTrackIndex((index) => (index + 1) % tracks.length);
     };
@@ -219,26 +295,52 @@ export default function MusicPlayer() {
     const handlePause = () => setIsPlaying(false);
 
     audio.addEventListener("loadedmetadata", handleLoadedMetadata);
+    audio.addEventListener("durationchange", syncDuration);
+    audio.addEventListener("loadeddata", syncDuration);
+    audio.addEventListener("canplay", syncDuration);
     audio.addEventListener("timeupdate", handleTimeUpdate);
     audio.addEventListener("ended", handleEnded);
     audio.addEventListener("play", handlePlay);
     audio.addEventListener("pause", handlePause);
 
+    if (audio.readyState >= HTMLMediaElement.HAVE_METADATA) {
+      handleLoadedMetadata();
+    }
+
     return () => {
+      persistSession();
       audio.pause();
       document.removeEventListener("pointerdown", resumeOnInteraction);
       document.removeEventListener("keydown", resumeOnInteraction);
       audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
+      audio.removeEventListener("durationchange", syncDuration);
+      audio.removeEventListener("loadeddata", syncDuration);
+      audio.removeEventListener("canplay", syncDuration);
       audio.removeEventListener("timeupdate", handleTimeUpdate);
       audio.removeEventListener("ended", handleEnded);
       audio.removeEventListener("play", handlePlay);
       audio.removeEventListener("pause", handlePause);
+
       if (window.__beihaiActiveAudio === audio) {
         window.__beihaiActiveAudio = undefined;
       }
+
       audioRef.current = null;
     };
   }, [currentTrack.src]);
+
+  useEffect(() => {
+    persistSession();
+  }, [currentTrackIndex, isPlaying, volume]);
+
+  useEffect(() => {
+    const handleBeforeUnload = () => persistSession();
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [currentTrackIndex, isPlaying, volume]);
 
   const togglePlay = async () => {
     const audio = audioRef.current;
@@ -267,12 +369,22 @@ export default function MusicPlayer() {
 
   const seek = (value: number) => {
     const audio = audioRef.current;
-    if (!audio || !duration) {
+    if (!audio) {
       return;
     }
 
-    audio.currentTime = value;
-    setCurrentTime(value);
+    const nextTime = Math.max(0, value);
+    audio.currentTime = nextTime;
+    setCurrentTime(nextTime);
+  };
+
+  const beginSeek = () => {
+    isSeekingRef.current = true;
+  };
+
+  const endSeek = (value: number) => {
+    seek(value);
+    isSeekingRef.current = false;
   };
 
   const selectTrack = (index: number) => {
@@ -280,11 +392,13 @@ export default function MusicPlayer() {
       return;
     }
 
+    pendingSeekRef.current = null;
     shouldAutoPlayRef.current = isPlaying;
     setCurrentTrackIndex(index);
   };
 
   const moveTrack = (direction: 1 | -1) => {
+    pendingSeekRef.current = null;
     shouldAutoPlayRef.current = isPlaying;
     setCurrentTrackIndex((index) => (index + direction + tracks.length) % tracks.length);
   };
@@ -300,6 +414,9 @@ export default function MusicPlayer() {
   };
 
   const volumePercent = Math.round(volume * 100);
+  const progressMax = duration > 0 ? duration : 100;
+  const progressValue = duration > 0 ? currentTime : 0;
+  const canSeek = duration > 0;
 
   return (
     <div className="grid min-w-0 gap-4 max-sm:gap-3" aria-label="音乐播放器">
@@ -368,12 +485,17 @@ export default function MusicPlayer() {
             className="music-progress-slider mt-2 w-full cursor-pointer outline-none disabled:cursor-not-allowed disabled:opacity-60"
             type="range"
             min="0"
-            max={duration || 0}
-            value={duration ? currentTime : 0}
-            step="1"
-            disabled={!duration}
+            max={progressMax}
+            value={progressValue}
+            step="any"
+            disabled={!canSeek}
+            onPointerDown={beginSeek}
+            onPointerUp={(event) => endSeek(Number(event.currentTarget.value))}
+            onPointerCancel={() => {
+              isSeekingRef.current = false;
+            }}
             onInput={(event) => seek(Number(event.currentTarget.value))}
-            onChange={(event) => seek(Number(event.currentTarget.value))}
+            onChange={(event) => endSeek(Number(event.currentTarget.value))}
             style={{ "--music-progress": `${progress}%` } as CSSProperties}
             aria-label="播放进度"
           />

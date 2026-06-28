@@ -3,6 +3,7 @@ import "../styles/global.css";
 
 import Navbar from "../components/layout/Navbar.astro";
 import Sidebar from "../components/layout/Sidebar.astro";
+import SiteClientRouter from "../components/layout/SiteClientRouter.astro";
 import siteIcon from "../assets/site-icon.png";
 
 const pageTitle = "关于";
@@ -27,6 +28,7 @@ const tocTitleClass =
     <link rel="icon" type="image/png" href={siteIcon.src} />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
+    <SiteClientRouter />
     <title>{pageTitle} | 北海</title>
     <meta name="description" content="关于北海的占位页面" />
   </head>

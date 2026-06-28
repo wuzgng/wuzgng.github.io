@@ -5,6 +5,7 @@ import "../../styles/global.css";
 
 import Navbar from "../../components/layout/Navbar.astro";
 import Sidebar from "../../components/layout/Sidebar.astro";
+import SiteClientRouter from "../../components/layout/SiteClientRouter.astro";
 import siteIcon from "../../assets/site-icon.png";
 
 export async function getStaticPaths() {
@@ -41,6 +42,7 @@ const tocTitleClass =
     <link rel="icon" type="image/png" href={siteIcon.src} />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
+    <SiteClientRouter />
     <title>{post.data.title} | 北海</title>
     {post.data.description && <meta name="description" content={post.data.description} />}
   </head>

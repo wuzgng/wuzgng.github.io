@@ -6,6 +6,7 @@ import "../../styles/global.css";
 import Navbar from "../layout/Navbar.astro";
 import RightAside from "../layout/RightAside.astro";
 import Sidebar from "../layout/Sidebar.astro";
+import SiteClientRouter from "../layout/SiteClientRouter.astro";
 import siteIcon from "../../assets/site-icon.png";
 
 interface Props {
@@ -37,6 +38,7 @@ const tagClass =
     <link rel="icon" type="image/png" href={siteIcon.src} />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
+    <SiteClientRouter />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
   </head>

@@ -6,6 +6,7 @@ import MainContent from "../components/home/MainContent.astro";
 import Navbar from "../components/layout/Navbar.astro";
 import RightAside from "../components/layout/RightAside.astro";
 import Sidebar from "../components/layout/Sidebar.astro";
+import SiteClientRouter from "../components/layout/SiteClientRouter.astro";
 import siteIcon from "../assets/site-icon.png";
 ---
 
@@ -15,6 +16,7 @@ import siteIcon from "../assets/site-icon.png";
 		<link rel="icon" type="image/png" href={siteIcon.src} />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
+		<SiteClientRouter />
 		<title>北海</title>
 	</head>
 	<body class="min-h-screen">

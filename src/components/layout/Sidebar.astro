@@ -50,11 +50,21 @@ const tagClass =
   </section>
 
   <div class="grid gap-4">
-    <section class={cardClass} aria-labelledby="music-player-title">
+    <section class={cardClass} data-sidebar-music aria-labelledby="music-player-title">
       <h3 id="music-player-title" class="sr-only">音乐播放器</h3>
-      {musicHydration === "all" && <MusicPlayer client:load />}
-      {musicHydration === "desktop" && <MusicPlayer client:media="(min-width: 821px)" />}
-      {musicHydration === "mobile" && <MusicPlayer client:media="(max-width: 820px)" />}
+      {musicHydration === "all" && (
+        <MusicPlayer client:load transition:persist="beihai-music-player" transition:persist-props />
+      )}
+      {musicHydration === "desktop" && (
+        <MusicPlayer
+          client:media="(min-width: 821px)"
+          transition:persist="beihai-music-player"
+          transition:persist-props
+        />
+      )}
+      {musicHydration === "mobile" && (
+        <MusicPlayer client:media="(max-width: 820px)" />
+      )}
     </section>
 
     <section class={cardClass} aria-labelledby="social-title">
