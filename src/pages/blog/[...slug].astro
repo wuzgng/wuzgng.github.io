@@ -47,13 +47,13 @@ const tocTitleClass =
   <body class="min-h-screen">
     <Navbar />
     <main
-      class="relative z-10 mx-auto grid w-[min(calc(100%_-_0.75rem),1600px)] grid-cols-1 items-start gap-3 py-28 text-text-primary min-[821px]:grid-cols-[minmax(0,14rem)_minmax(0,1fr)] min-[1101px]:grid-cols-[minmax(0,14rem)_minmax(0,1fr)_minmax(0,14rem)] dark:text-text-primary-dark"
+      class="site-grid site-grid--page relative z-10 text-text-primary dark:text-text-primary-dark"
     >
-      <div class="min-w-0 min-[821px]:sticky min-[821px]:top-20">
+      <div class="hidden min-w-0 min-[821px]:block min-[821px]:sticky min-[821px]:top-20">
         <Sidebar />
       </div>
       <div class="min-w-0">
-        <article class="rounded-card border border-border bg-card p-6 backdrop-blur-lg dark:border-border-dark dark:bg-card-dark sm:p-8">
+        <article class="rounded-card border border-border bg-card p-4 backdrop-blur-lg dark:border-border-dark dark:bg-card-dark sm:p-8">
           <header class="border-b border-border pb-6 dark:border-border-dark">
             <a
               class="text-sm font-semibold text-text-secondary no-underline transition-colors duration-200 hover:text-accent dark:text-text-secondary-dark"
@@ -82,7 +82,7 @@ const tocTitleClass =
           </div>
         </article>
       </div>
-      <div class="min-w-0 min-[821px]:col-start-2 min-[1101px]:sticky min-[1101px]:top-20 min-[1101px]:col-auto">
+      <div class="hidden min-w-0 min-[821px]:col-start-2 min-[821px]:block min-[1101px]:sticky min-[1101px]:top-20 min-[1101px]:col-auto">
         <aside class="grid w-full content-start gap-4 text-text-primary dark:text-text-primary-dark" aria-label="文章辅助信息">
           <section class={tocCardClass} aria-labelledby="article-toc-title">
             <h2 id="article-toc-title" class={tocTitleClass}>文章目录</h2>
@@ -112,6 +112,45 @@ const tocTitleClass =
         </aside>
       </div>
     </main>
+    <details class="mobile-assist min-[821px]:hidden">
+      <summary class="mobile-assist__toggle" aria-label="打开辅助信息">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 12h14M12 5v14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" />
+        </svg>
+      </summary>
+      <div class="mobile-assist__panel scrollbar-thin">
+        <div class="grid gap-3">
+          <Sidebar />
+          <aside class="grid w-full content-start gap-4 text-text-primary dark:text-text-primary-dark" aria-label="文章辅助信息">
+            <section class={tocCardClass} aria-labelledby="mobile-article-toc-title">
+              <h2 id="mobile-article-toc-title" class={tocTitleClass}>文章目录</h2>
+              {
+                tocHeadings.length > 0 ? (
+                  <nav aria-label="文章目录">
+                    <ol class="m-0 grid list-none gap-2 p-0">
+                      {tocHeadings.map((heading) => (
+                        <li class={heading.depth === 3 ? "pl-3" : ""}>
+                          <a
+                            class="block rounded-card px-2 py-2 text-sm leading-5 text-text-secondary no-underline transition duration-200 hover:bg-primary/10 hover:text-text-primary dark:text-text-secondary-dark dark:hover:bg-white/8 dark:hover:text-text-primary-dark"
+                            href={`#${heading.slug}`}
+                          >
+                            {heading.text}
+                          </a>
+                        </li>
+                      ))}
+                    </ol>
+                  </nav>
+                ) : (
+                  <p class="m-0 text-sm leading-6 text-text-secondary dark:text-text-secondary-dark">
+                    这篇文章暂无可跳转的小标题。
+                  </p>
+                )
+              }
+            </section>
+          </aside>
+        </div>
+      </div>
+    </details>
   </body>
 </html>
 

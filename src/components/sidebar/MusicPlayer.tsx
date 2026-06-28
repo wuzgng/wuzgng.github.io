@@ -139,11 +139,11 @@ export default function MusicPlayer() {
   };
 
   return (
-    <div className="grid gap-4" aria-label="音乐播放器">
-      <div className="flex items-start justify-between gap-3">
+    <div className="grid gap-4 max-sm:gap-3" aria-label="音乐播放器">
+      <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="min-w-0">
           <p className="m-0 text-xs font-bold uppercase leading-none tracking-[0.12em] text-text-muted dark:text-text-muted-dark">
-           音乐时间
+            音乐时间
           </p>
           <p className="mt-2 truncate text-base font-bold leading-6 tracking-[-0.04em]">
             {currentTrack.title}
@@ -152,12 +152,12 @@ export default function MusicPlayer() {
             {currentTrack.artist}
           </p>
         </div>
-        <span className="rounded-pill border border-primary/16 bg-primary/8 px-2.5 py-1 text-[0.68rem] font-medium leading-none text-text-muted dark:border-primary/18 dark:bg-primary/10 dark:text-text-muted-dark">
+        <span className="shrink-0 rounded-pill border border-primary/16 bg-primary/8 px-2.5 py-1 text-[0.68rem] font-medium leading-none text-text-muted dark:border-primary/18 dark:bg-primary/10 dark:text-text-muted-dark">
           {isPlaying ? "播放中" : isReady ? "已暂停" : "加载中"}
         </span>
       </div>
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 max-[360px]:grid max-[360px]:grid-cols-[3.5rem_minmax(0,1fr)]">
         <div
           className={`grid h-14 w-14 shrink-0 place-items-center rounded-card border border-primary/18 bg-gradient-to-br ${currentTrack.accent} shadow-[0_14px_32px_rgb(0_0_0_/_0.12)] dark:border-primary/20`}
           aria-hidden="true"
@@ -185,9 +185,9 @@ export default function MusicPlayer() {
         </div>
       </div>
 
-      <div className="grid grid-cols-[1fr_auto_1fr_auto] items-center gap-2">
+      <div className="grid grid-cols-[1fr_auto_1fr_auto] items-center gap-2 max-[360px]:grid-cols-4">
         <button
-          className="grid min-h-11 place-items-center rounded-card border border-transparent text-text-muted transition duration-200 hover:-translate-y-px hover:bg-primary/8 hover:text-text-primary dark:text-text-muted-dark dark:hover:bg-white/8 dark:hover:text-text-primary-dark"
+          className="grid min-h-12 touch-manipulation place-items-center rounded-card border border-transparent text-text-muted transition duration-200 hover:-translate-y-px hover:bg-primary/8 hover:text-text-primary dark:text-text-muted-dark dark:hover:bg-white/8 dark:hover:text-text-primary-dark"
           type="button"
           onClick={() => moveTrack(-1)}
           aria-label="上一首"
@@ -197,7 +197,7 @@ export default function MusicPlayer() {
           </svg>
         </button>
         <button
-          className="grid h-14 w-14 place-items-center rounded-pill border border-accent/18 bg-accent/16 text-accent transition duration-200 hover:-translate-y-px hover:bg-accent/22 dark:border-accent/24 dark:bg-accent/18"
+          className="grid h-14 w-14 touch-manipulation place-items-center rounded-pill border border-accent/18 bg-accent/16 text-accent transition duration-200 hover:-translate-y-px hover:bg-accent/22 dark:border-accent/24 dark:bg-accent/18 max-[360px]:h-12 max-[360px]:w-12"
           type="button"
           onClick={togglePlay}
           aria-label={isPlaying ? "暂停" : "播放"}
@@ -213,7 +213,7 @@ export default function MusicPlayer() {
           )}
         </button>
         <button
-          className="grid min-h-11 place-items-center rounded-card border border-transparent text-text-muted transition duration-200 hover:-translate-y-px hover:bg-primary/8 hover:text-text-primary dark:text-text-muted-dark dark:hover:bg-white/8 dark:hover:text-text-primary-dark"
+          className="grid min-h-12 touch-manipulation place-items-center rounded-card border border-transparent text-text-muted transition duration-200 hover:-translate-y-px hover:bg-primary/8 hover:text-text-primary dark:text-text-muted-dark dark:hover:bg-white/8 dark:hover:text-text-primary-dark"
           type="button"
           onClick={() => moveTrack(1)}
           aria-label="下一首"
@@ -223,7 +223,7 @@ export default function MusicPlayer() {
           </svg>
         </button>
         <button
-          className="grid min-h-11 place-items-center rounded-card border border-transparent text-text-muted transition duration-200 hover:-translate-y-px hover:bg-primary/8 hover:text-accent dark:text-text-muted-dark dark:hover:bg-white/8 dark:hover:text-accent"
+          className="grid min-h-12 touch-manipulation place-items-center rounded-card border border-transparent text-text-muted transition duration-200 hover:-translate-y-px hover:bg-primary/8 hover:text-accent dark:text-text-muted-dark dark:hover:bg-white/8 dark:hover:text-accent"
           type="button"
           onClick={() => setIsPlaylistOpen((value) => !value)}
           aria-label={isPlaylistOpen ? "折叠播放列表" : "展开播放列表"}
@@ -243,14 +243,14 @@ export default function MusicPlayer() {
       </div>
 
       {isPlaylistOpen && (
-        <div className="max-h-44 overflow-y-auto border-t border-border pt-3 pr-1 scrollbar-thin dark:border-border-dark" aria-label="播放列表">
+        <div className="max-h-40 overflow-y-auto border-t border-border pt-3 pr-1 scrollbar-thin dark:border-border-dark sm:max-h-44" aria-label="播放列表">
           <div className="grid gap-1">
             {tracks.map((track, index) => {
               const isActive = index === currentTrackIndex;
 
               return (
                 <button
-                  className={`grid grid-cols-[2rem_minmax(0,1fr)] items-center gap-3 rounded-card px-2 py-2 text-left transition duration-200 ${
+                  className={`grid min-h-12 touch-manipulation grid-cols-[2rem_minmax(0,1fr)] items-center gap-3 rounded-card px-2 py-2 text-left transition duration-200 ${
                     isActive
                       ? "bg-accent/10 text-text-primary dark:bg-accent/14 dark:text-text-primary-dark"
                       : "text-text-secondary hover:bg-primary/8 hover:text-text-primary dark:text-text-secondary-dark dark:hover:bg-white/8 dark:hover:text-text-primary-dark"

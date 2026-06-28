@@ -21,17 +21,30 @@ import siteIcon from "../assets/site-icon.png";
 		<Navbar />
 		<Hero />
 		<main
-			class="relative z-10 mx-auto grid w-[min(calc(100%_-_0.75rem),1600px)] grid-cols-1 items-start gap-3 py-16 min-[821px]:grid-cols-[minmax(0,14rem)_minmax(0,1fr)] min-[1101px]:grid-cols-[minmax(0,14rem)_minmax(0,1fr)_minmax(0,14rem)]"
+			class="site-grid site-grid--home relative z-10"
 		>
-			<div class="min-w-0 min-[821px]:sticky min-[821px]:top-20">
+			<div class="hidden min-w-0 min-[821px]:block min-[821px]:sticky min-[821px]:top-20">
 				<Sidebar />
 			</div>
 			<div class="min-w-0">
 				<MainContent />
 			</div>
-			<div class="min-w-0 min-[821px]:col-start-2 min-[1101px]:sticky min-[1101px]:top-20 min-[1101px]:col-auto">
+			<div class="hidden min-w-0 min-[821px]:col-start-2 min-[821px]:block min-[1101px]:sticky min-[1101px]:top-20 min-[1101px]:col-auto">
 				<RightAside />
 			</div>
 		</main>
+		<details class="mobile-assist min-[821px]:hidden">
+			<summary class="mobile-assist__toggle" aria-label="打开辅助信息">
+				<svg class="h-5 w-5" viewBox="0 0 24 24" aria-hidden="true">
+					<path d="M5 12h14M12 5v14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" />
+				</svg>
+			</summary>
+			<div class="mobile-assist__panel scrollbar-thin">
+				<div class="grid gap-3">
+					<Sidebar />
+					<RightAside />
+				</div>
+			</div>
+		</details>
 	</body>
 </html>
