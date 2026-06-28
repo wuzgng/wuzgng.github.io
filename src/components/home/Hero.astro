@@ -1,0 +1,79 @@
+---
+import heroImage from "../../assets/hero-background.png";
+---
+
+<section class="relative flex min-h-screen items-center overflow-hidden bg-background-dark text-white" aria-labelledby="hero-title">
+  <div
+    class="absolute inset-0 scale-[1.02] bg-cover bg-center"
+    style={`background-image: url("${heroImage.src}")`}
+    aria-hidden="true"
+  ></div>
+  <div class="hero-scrim absolute inset-0" aria-hidden="true"></div>
+  <div class="hero-fade absolute inset-x-0 bottom-0 h-[34vh]" aria-hidden="true"></div>
+
+  <div class="relative z-10 mx-auto w-[min(calc(100%_-_3rem),1180px)] py-28 pt-36 max-sm:w-[min(calc(100%_-_2rem),1180px)] max-sm:py-16 max-sm:pt-28">
+    <p class="mb-5 text-xs font-semibold uppercase tracking-[0.32em] text-white/62">
+      Personal Tech Blog
+    </p>
+
+    <h1 id="hero-title" class="max-w-[10ch] text-[clamp(4.5rem,13vw,9.5rem)] font-bold leading-[0.92] tracking-[-0.08em] text-balance">
+      北海
+    </h1>
+
+    <p class="mt-8 max-w-[12ch] text-[clamp(1.75rem,4vw,3rem)] font-semibold leading-[1.08] tracking-[-0.045em]">
+      欢迎来到北海的博客
+    </p>
+
+    <p class="mt-5 max-w-2xl text-lg leading-8 text-white/76">
+      记录生活，分享思考，探索技术的无限可能
+    </p>
+
+    <div class="mt-10 flex flex-wrap gap-3 max-sm:flex-col max-sm:items-stretch" aria-label="Hero actions">
+      <a
+        class="inline-flex min-h-12 items-center justify-center rounded-pill border border-white/75 bg-white/90 px-6 py-3 text-sm font-semibold leading-none text-background-dark no-underline shadow-[0_14px_34px_rgb(0_0_0_/_0.18)] transition duration-200 hover:-translate-y-px hover:bg-white"
+        href="/blog"
+      >
+        探索博客
+      </a>
+      <a
+        class="inline-flex min-h-12 items-center justify-center rounded-pill border border-white/18 bg-white/12 px-6 py-3 text-sm font-semibold leading-none text-white no-underline backdrop-blur-md transition duration-200 hover:-translate-y-px hover:border-white/38 hover:bg-white/18"
+        href="/projects"
+      >
+        View Projects
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-scrim {
+    background:
+      radial-gradient(circle at 20% 52%, rgb(142 164 200 / 0.12), transparent 30%),
+      linear-gradient(90deg, rgb(3 7 18 / 0.44) 0%, rgb(3 7 18 / 0.22) 34%, rgb(3 7 18 / 0.04) 68%, transparent 100%);
+  }
+
+  .hero-fade {
+    background: linear-gradient(180deg, rgb(246 247 250 / 0) 0%, rgb(246 247 250 / 0.34) 68%, var(--color-background) 100%);
+  }
+
+  :global(.dark) .hero-fade {
+    background: linear-gradient(180deg, rgb(9 13 24 / 0) 0%, rgb(9 13 24 / 0.38) 72%, var(--color-background-dark) 100%);
+  }
+
+  @media (max-width: 720px) {
+    .hero-scrim {
+      background:
+        radial-gradient(circle at 28% 42%, rgb(142 164 200 / 0.12), transparent 34%),
+        linear-gradient(90deg, rgb(3 7 18 / 0.42), rgb(3 7 18 / 0.08));
+    }
+
+    .hero-fade {
+      height: 28vh;
+      background: linear-gradient(180deg, rgb(246 247 250 / 0) 0%, rgb(246 247 250 / 0.4) 70%, var(--color-background) 100%);
+    }
+
+    :global(.dark) .hero-fade {
+      background: linear-gradient(180deg, rgb(9 13 24 / 0) 0%, rgb(9 13 24 / 0.44) 72%, var(--color-background-dark) 100%);
+    }
+  }
+</style>

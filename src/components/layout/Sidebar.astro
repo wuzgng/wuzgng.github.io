@@ -1,0 +1,68 @@
+---
+import avatar from "../../assets/sidebar-avatar.png";
+import MusicPlayer from "../sidebar/MusicPlayer";
+
+const skills = ["AI", "LLM", "Frontend", "TS", "Python"];
+
+const socialLinks = [
+  { label: "GitHub", href: "https://github.com/asJEI" },
+  { label: "X", href: "https://x.com/BeiHai_Hokkai" },
+];
+
+const cardClass =
+  "rounded-card border border-border bg-card p-4 backdrop-blur-lg transition duration-200 hover:-translate-y-px hover:border-primary/30 hover:bg-white/82 dark:border-border-dark dark:bg-card-dark dark:hover:border-primary/30 dark:hover:bg-white/7";
+const sectionTitleClass =
+  "mb-3 text-xs font-bold uppercase leading-none tracking-[0.12em] text-text-muted dark:text-text-muted-dark";
+const tagClass =
+  "rounded-pill border border-primary/16 bg-primary/8 px-3 py-2 text-xs font-medium leading-none text-text-secondary transition-colors duration-200 hover:border-accent/28 hover:bg-accent/9 hover:text-text-primary dark:border-primary/18 dark:bg-primary/10 dark:text-text-secondary-dark dark:hover:border-accent/30 dark:hover:bg-accent/12 dark:hover:text-text-primary-dark";
+---
+
+<aside class="grid w-full gap-4 text-text-primary dark:text-text-primary-dark" aria-label="个人信息侧边栏">
+  <section class={`${cardClass} grid gap-3`} aria-labelledby="profile-title">
+    <img class="h-[5.5rem] w-[5.5rem] rounded-card border border-primary/20 object-cover dark:border-primary/25" src={avatar.src} alt="北海的头像" width="88" height="88" />
+
+    <div>
+      <h2 id="profile-title" class="m-0 text-xl font-bold leading-tight tracking-[-0.05em]">北海</h2>
+      <p class="mt-2 text-sm leading-6 text-text-secondary dark:text-text-secondary-dark">
+        一个普通的大三学生罢了
+      </p>
+    </div>
+  </section>
+
+  <section class={cardClass} aria-labelledby="skills-title">
+    <h3 id="skills-title" class={sectionTitleClass}>个人标签</h3>
+    <div class="flex flex-wrap gap-2" aria-label="技能标签">
+      {skills.map((skill) => <span class={tagClass}>{skill}</span>)}
+    </div>
+  </section>
+
+  <section class={cardClass} aria-labelledby="notice-title">
+    <h3 id="notice-title" class={sectionTitleClass}>座右铭</h3>
+    <p class="m-0 text-sm leading-7 text-text-secondary dark:text-text-secondary-dark">
+      北海虽赊，扶摇可接
+    </p>
+  </section>
+
+  <section class={cardClass} aria-labelledby="music-player-title">
+    <h3 id="music-player-title" class="sr-only">音乐播放器</h3>
+    <MusicPlayer client:load />
+  </section>
+
+  <section class={cardClass} aria-labelledby="social-title">
+    <h3 id="social-title" class={sectionTitleClass}>其他站点</h3>
+    <div class="grid gap-1">
+      {
+        socialLinks.map((link) => (
+          <a
+            class="flex items-center justify-between rounded-card px-3 py-2 text-sm font-semibold text-text-secondary no-underline transition duration-200 after:text-xs after:text-text-muted after:content-['↗'] hover:-translate-y-px hover:bg-primary/10 hover:text-text-primary dark:text-text-secondary-dark dark:after:text-text-muted-dark dark:hover:bg-white/8 dark:hover:text-text-primary-dark"
+            href={link.href}
+            target="_blank"
+            rel="noreferrer"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </div>
+  </section>
+</aside>

@@ -1,0 +1,157 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-background: #f6f7fa;
+  --color-background-dark: #090d18;
+  --color-card: rgb(255 255 255 / 0.76);
+  --color-card-dark: rgb(15 20 34 / 0.72);
+  --color-border: rgb(70 86 115 / 0.14);
+  --color-border-dark: rgb(226 232 240 / 0.12);
+  --color-primary: #8ea4c8;
+  --color-accent: #d47b8f;
+  --color-warm: #e7c7a6;
+  --color-text-primary: rgb(22 28 40);
+  --color-text-primary-dark: rgb(245 247 251);
+  --color-text-secondary: rgb(58 68 86 / 0.78);
+  --color-text-secondary-dark: rgb(230 235 245 / 0.72);
+  --color-text-muted: rgb(74 86 110 / 0.54);
+  --color-text-muted-dark: rgb(230 235 245 / 0.5);
+
+  --radius-card: 0.75rem;
+  --radius-pill: 999px;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    margin: 0;
+    background:
+      radial-gradient(circle at 18% 0%, rgb(142 164 200 / 0.18), transparent 34rem),
+      radial-gradient(circle at 82% 8%, rgb(231 199 166 / 0.12), transparent 30rem),
+      var(--color-background);
+    color: var(--color-text-primary);
+    font-family:
+      Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .dark body {
+    background:
+      radial-gradient(circle at 18% 0%, rgb(142 164 200 / 0.16), transparent 34rem),
+      radial-gradient(circle at 82% 8%, rgb(212 123 143 / 0.12), transparent 28rem),
+      var(--color-background-dark);
+    color: var(--color-text-primary-dark);
+  }
+
+  a {
+    color: inherit;
+  }
+}
+
+@layer components {
+  .music-progress-slider {
+    --music-progress: 0%;
+    height: 1.25rem;
+    appearance: none;
+    background: transparent;
+  }
+
+  .music-progress-slider::-webkit-slider-runnable-track {
+    height: 0.375rem;
+    border-radius: var(--radius-pill);
+    background: linear-gradient(
+      90deg,
+      var(--color-accent) 0%,
+      var(--color-accent) var(--music-progress),
+      rgb(142 164 200 / 0.16) var(--music-progress),
+      rgb(142 164 200 / 0.16) 100%
+    );
+  }
+
+  .music-progress-slider::-webkit-slider-thumb {
+    width: 1rem;
+    height: 1rem;
+    margin-top: -0.3125rem;
+    appearance: none;
+    border: 2px solid rgb(255 255 255 / 0.82);
+    border-radius: var(--radius-pill);
+    background: var(--color-accent);
+    box-shadow: 0 0.35rem 1rem rgb(0 0 0 / 0.16);
+  }
+
+  .music-progress-slider::-moz-range-track {
+    height: 0.375rem;
+    border-radius: var(--radius-pill);
+    background: rgb(142 164 200 / 0.16);
+  }
+
+  .music-progress-slider::-moz-range-progress {
+    height: 0.375rem;
+    border-radius: var(--radius-pill);
+    background: var(--color-accent);
+  }
+
+  .music-progress-slider::-moz-range-thumb {
+    width: 0.85rem;
+    height: 0.85rem;
+    border: 2px solid rgb(255 255 255 / 0.82);
+    border-radius: var(--radius-pill);
+    background: var(--color-accent);
+    box-shadow: 0 0.35rem 1rem rgb(0 0 0 / 0.16);
+  }
+
+  .dark .music-progress-slider::-webkit-slider-runnable-track {
+    background: linear-gradient(
+      90deg,
+      var(--color-accent) 0%,
+      var(--color-accent) var(--music-progress),
+      rgb(255 255 255 / 0.12) var(--music-progress),
+      rgb(255 255 255 / 0.12) 100%
+    );
+  }
+
+  .dark .music-progress-slider::-moz-range-track {
+    background: rgb(255 255 255 / 0.12);
+  }
+
+  .scrollbar-thin {
+    scrollbar-color: rgb(142 164 200 / 0.34) transparent;
+    scrollbar-width: thin;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 0.35rem;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    border-radius: var(--radius-pill);
+    background: rgb(142 164 200 / 0.28);
+  }
+
+  .dark .scrollbar-thin {
+    scrollbar-color: rgb(255 255 255 / 0.22) transparent;
+  }
+
+  .dark .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: rgb(255 255 255 / 0.2);
+  }
+}

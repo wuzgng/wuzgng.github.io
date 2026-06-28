@@ -1,0 +1,96 @@
+---
+const featuredProjects = [
+  {
+    title: "Featured Project",
+    summary: "用于展示个人项目的占位卡片，后续可替换为真实项目数据。",
+    tags: ["Astro", "TypeScript"],
+  },
+  {
+    title: "AI Playground",
+    summary: "记录 AI 工具、LLM 实验和工程化实践的占位项目。",
+    tags: ["AI", "LLM"],
+  },
+];
+
+const latestArticles = [
+  {
+    title: "如何搭建一个长期维护的个人博客",
+    date: "2026-06-27",
+    tags: ["Astro", "Blog"],
+    summary: "这里是文章摘要占位文本，用于展示文章列表卡片的基础结构。",
+  },
+  {
+    title: "关于前端工程化的一些思考",
+    date: "2026-06-20",
+    tags: ["Frontend", "Engineering"],
+    summary: "这里是文章摘要占位文本，后续会接入 Content Collections 数据。",
+  },
+  {
+    title: "LLM 时代的个人知识管理",
+    date: "2026-06-12",
+    tags: ["AI", "Notes"],
+    summary: "这里是文章摘要占位文本，用来保证列表布局在无真实内容时仍完整。",
+  },
+];
+
+const cardClass =
+  "rounded-card border border-border bg-card p-5 backdrop-blur-lg transition duration-200 hover:-translate-y-px hover:border-primary/30 hover:bg-white/82 dark:border-border-dark dark:bg-card-dark dark:hover:border-primary/30 dark:hover:bg-white/7";
+const eyebrowClass =
+  "m-0 text-xs font-bold uppercase leading-none tracking-[0.12em] text-text-muted dark:text-text-muted-dark";
+const sectionTitleClass = "mt-2 text-2xl font-bold leading-tight tracking-[-0.05em]";
+const tagClass =
+  "rounded-pill border border-primary/16 bg-primary/8 px-2 py-1 text-xs font-medium leading-tight text-text-secondary transition-colors duration-200 hover:border-accent/28 hover:bg-accent/9 hover:text-text-primary dark:border-primary/18 dark:bg-primary/10 dark:text-text-secondary-dark dark:hover:border-accent/30 dark:hover:bg-accent/12 dark:hover:text-text-primary-dark";
+---
+
+<section class="grid min-w-0 gap-8 text-text-primary dark:text-text-primary-dark" aria-label="博客主内容">
+  <section class="grid gap-4" aria-labelledby="featured-projects-title">
+    <div>
+      <p class={eyebrowClass}>Featured</p>
+      <h2 id="featured-projects-title" class={sectionTitleClass}>精选项目</h2>
+    </div>
+
+    <div class="grid gap-4 md:grid-cols-2">
+      {
+        featuredProjects.map((project) => (
+          <article class={cardClass}>
+            <div class="mb-4 flex flex-wrap gap-2">
+              {project.tags.map((tag) => <span class={tagClass}>{tag}</span>)}
+            </div>
+            <h3 class="m-0 text-lg font-bold leading-7 tracking-[-0.04em]">{project.title}</h3>
+            <p class="mt-3 text-sm leading-7 text-text-secondary dark:text-text-secondary-dark">
+              {project.summary}
+            </p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="grid gap-4" aria-labelledby="latest-articles-title">
+    <div>
+      <p class={eyebrowClass}>Latest</p>
+      <h2 id="latest-articles-title" class={sectionTitleClass}>最新文章</h2>
+    </div>
+
+    <div class="grid gap-4">
+      {
+        latestArticles.map((article) => (
+          <article class={`${cardClass} grid gap-3`}>
+            <div class="grid gap-2 sm:flex sm:items-start sm:justify-between sm:gap-4">
+              <h3 class="m-0 text-lg font-bold leading-7 tracking-[-0.04em]">{article.title}</h3>
+              <time class="shrink-0 text-xs leading-6 text-text-muted dark:text-text-muted-dark" datetime={article.date}>
+                {article.date}
+              </time>
+            </div>
+            <p class="m-0 text-sm leading-7 text-text-secondary dark:text-text-secondary-dark">
+              {article.summary}
+            </p>
+            <div class="flex flex-wrap gap-2">
+              {article.tags.map((tag) => <span class={tagClass}>{tag}</span>)}
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</section>
