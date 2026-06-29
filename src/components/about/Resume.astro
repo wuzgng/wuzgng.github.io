@@ -1,0 +1,293 @@
+<div class="resume">
+  <main class="resume-page">
+    <header>
+      <h1>张雨阳</h1>
+      <div class="resume-contact">
+        <div>181*******2 | 316920080dd@gmail.com</div>
+        <div>GitHub: https://github.com/asJEI</div>
+        <div>Blog: https://www.hokkai2005.online</div>
+      </div>
+      <div class="resume-summary">
+        AI 应用开发与全栈工程方向大三学生，关注 LLM 应用、AI 辅助开发和开发者工具。熟悉 AI Native 开发流程，能将 LLM 能力落地到代码审查、双平台 Bot、技术内容平台等实际产品场，已完成 AI 代码审查、多平台聊天机器人、个人博客等项目，并持续通过技术博客记录实践过程。
+      </div>
+    </header>
+
+    <div class="resume-layout">
+      <aside>
+        <section>
+          <h2>技术栈</h2>
+          <div class="resume-tag-group">
+            <div class="resume-tag-title">编程语言</div>
+            <div class="resume-tags">TypeScript, Python, JavaScript</div>
+          </div>
+          <div class="resume-tag-group">
+            <div class="resume-tag-title">AI 与大模型应用</div>
+            <div class="resume-tags">LLM API (OpenAI/DeepSeek/Gemini), Prompt 设计与优化, 对话上下文管理, RAG 检索增强生成</div>
+          </div>
+          <div class="resume-tag-group">
+            <div class="resume-tag-title">后端开发</div>
+            <div class="resume-tags">Node.js, FastAPI, Webhook, SSE</div>
+          </div>
+          <div class="resume-tag-group">
+            <div class="resume-tag-title">前端开发</div>
+            <div class="resume-tags">React, Vite, Tailwind CSS, Astro， WordPress</div>
+          </div>
+          <div class="resume-tag-group">
+            <div class="resume-tag-title">部署与开发者工具</div>
+            <div class="resume-tags">Docker, Linux, Nginx</div>
+          </div>
+        </section>
+
+        <section>
+          <h2>教育经历</h2>
+          <h3>商丘学院</h3>
+          <div class="resume-meta">计算机科学与技术 | 本科</div>
+          <div class="resume-meta">2023 - 2027</div>
+          <ul class="resume-compact-list">
+            <li>长期实践 AI Native 应用、LLM 工程化与开发者工具方向项目。</li>
+            <li>相关课程：数据结构、操作系统、计算机网络、数据库、软件工程等</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>校园经历</h2>
+          <h3>党委宣传部新媒体中心</h3>
+          <div class="resume-meta">视觉设计副总监 | 2023.09 - 2025.09</div>
+          <ul class="resume-compact-list">
+            <li>负责校级活动视觉物料设计与新媒体内容交付，对接策划、运营等多方需求，完成需求沟通、设计交付与上线发布</li>
+          </ul>
+        </section>
+      </aside>
+
+      <section>
+        <h2>项目经历</h2>
+
+        <article class="resume-project">
+          <div class="resume-project-head">
+            <div>
+              <h3>PR-Review：AI 驱动的 Pull Request 代码审查系统</h3>
+              <div class="resume-link">
+                <div>GitHub: https://github.com/asJEI/PR-Review</div>
+                <div>Demo: http://119.45.237.47:8081/</div>
+              </div>
+            </div>
+            <div class="resume-project-time">2026.05 - 2026.06</div>
+          </div>
+          <ul>
+            <li>独立开发面向 GitHub PR 的 AI Code Review 系统，用户输入 PR 链接后自动获取变更信息并生成审查结果</li>
+            <li>采用 TypeScript + React + Node.js 全栈开发，使用 Monorepo + pnpm workspace 管理前后端代码及依赖</li>
+            <li>实现 Diff 内容解析与结构化整理，提取文件、行号等关键信息，构建适合 LLM 阅读的上下文内容</li>
+            <li>设计上下文压缩策略，过滤 vendor/lock/format-only 等低价值噪声，控制输入 LLM 的 Token 输入预算，提升有限上下文窗口内的有效信息占比。</li>
+            <li>设计 Summary、Risk、Comment 三个 Agent，分别负责 PR 摘要、工程风险分析和 Review 建议生成，输出结构化审查结果</li>
+            <li>实现 Review Comment 与文件、行号的映射，支持评论精准定位至对应代码位置</li>
+            <li>设计三列式界面（文件树 / Diff Viewer / AI Review Panel），支持审查进度展示及 Summary、Risk、Comment 等结构化结果可视化</li>
+          </ul>
+        </article>
+
+        <article class="resume-project">
+          <div class="resume-project-head">
+            <div>
+              <h3>Feishu QQ LLM Bot：双平台 AI Agent 聊天机器人</h3>
+              <div class="resume-link">
+                <div>GitHub: https://github.com/asJEI/feishu-qq-llm-bot</div>
+              </div>
+            </div>
+            <div class="resume-project-time">2026.03 - 2026.04</div>
+          </div>
+          <ul>
+            <li>独立开发飞书 + QQ 双平台 LLM Bot，用一套后端同时接入飞书开放平台和 QQ Webhook</li>
+            <li>抽象统一消息处理流程，将平台适配、LLM 调用、工具调用与记忆管理解耦，实现双平台复用同一套核心逻辑</li>
+            <li>实现会话上下文管理与 ChromaDB 向量长期记忆，通过语义检索召回历史对话，并将相关记忆注入系统 Prompt</li>
+            <li>基于 Function Calling 实现联网搜索、长期记忆检索等工具调用能力，并通过 skills/plugins 目录扩展自定义工具</li>
+            <li>提供 Docker Compose 部署配置，包含 Bot 服务与 ChromaDB 向量数据库，支持一键部署、日志查看及本地/云服务器运行</li>
+          </ul>
+        </article>
+
+        <article class="resume-project">
+          <div class="resume-project-head">
+            <div>
+              <h3>AI 技术博客与知识沉淀平台</h3>
+              <div class="resume-link">
+                <div>Blog: https://www.hokkai2005.online</div>
+                <div>GitHub: https://github.com/asJEI/Astro-blog</div>
+              </div>
+            </div>
+            <div class="resume-project-time">2025.12 - 2026.06</div>
+          </div>
+          <ul>
+            <li>基于 Astro + TypeScript 独立开发并持续维护个人技术博客，完成 WordPress 向静态站点的重构迁移，实现响应式布局、深色模式、文章检索及 SEO 优化等功能</li>
+            <li>独立完成 Cloudflare Pages 自动化部署、域名解析、HTTPS 配置及持续运维，构建从开发、版本管理到线上发布的完整工程化流程</li>
+            <li>持续输出 AI 工程、LLM 应用、Agent 工作流等原创技术文章 10+ 篇，将项目实践沉淀为可复用的技术文档，并持续优化博客性能与阅读体验</li>
+          </ul>
+        </article>
+      </section>
+    </div>
+  </main>
+</div>
+
+<style>
+  .resume {
+    --resume-ink: #111827;
+    --resume-muted: #4b5563;
+    --resume-subtle: #6b7280;
+    --resume-line: #d1d5db;
+    --resume-soft: #f3f4f6;
+    --resume-accent: #1d4ed8;
+
+    margin-top: 1rem;
+    overflow-x: auto;
+    color: var(--resume-ink);
+    font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", Arial, sans-serif;
+    font-size: 13px;
+    line-height: 1.48;
+  }
+
+  .resume-page {
+    width: min(210mm, 100%);
+    min-width: 0;
+    margin: 0 auto;
+    padding: 18mm 16mm;
+    background: #ffffff;
+    border: 1px solid var(--resume-line);
+    border-radius: var(--radius-card);
+  }
+
+  .resume header {
+    border-bottom: 2px solid var(--resume-ink);
+    padding-bottom: 10px;
+    margin-bottom: 14px;
+  }
+
+  .resume h1 {
+    margin: 0;
+    font-size: 30px;
+    line-height: 1.1;
+    letter-spacing: 0.08em;
+    color: var(--resume-ink);
+  }
+
+  .resume-contact {
+    margin-top: 7px;
+    color: var(--resume-muted);
+    font-size: 12.5px;
+  }
+
+  .resume-summary {
+    margin-top: 10px;
+    color: var(--resume-ink);
+    font-size: 13px;
+  }
+
+  .resume-layout {
+    display: grid;
+    grid-template-columns: 31% 1fr;
+    gap: 18px;
+    align-items: start;
+  }
+
+  .resume section {
+    margin-bottom: 14px;
+  }
+
+  .resume h2 {
+    margin: 0 0 7px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--resume-line);
+    color: var(--resume-ink);
+    font-size: 15px;
+    letter-spacing: 0.06em;
+  }
+
+  .resume h3 {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.35;
+    color: var(--resume-ink);
+  }
+
+  .resume-meta {
+    margin-top: 2px;
+    color: var(--resume-subtle);
+    font-size: 12px;
+  }
+
+  .resume-tag-group {
+    margin-bottom: 8px;
+  }
+
+  .resume-tag-title {
+    margin-bottom: 2px;
+    color: var(--resume-ink);
+    font-weight: 700;
+  }
+
+  .resume-tags {
+    color: var(--resume-muted);
+  }
+
+  .resume ul {
+    margin: 6px 0 0;
+    padding-left: 17px;
+  }
+
+  .resume li {
+    margin-bottom: 4px;
+  }
+
+  .resume-project {
+    margin-bottom: 15px;
+  }
+
+  .resume-project-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    border-left: 3px solid var(--resume-accent);
+    padding-left: 8px;
+    margin-bottom: 5px;
+  }
+
+  .resume-project-time {
+    flex: 0 0 auto;
+    color: var(--resume-subtle);
+    font-size: 12px;
+    padding-top: 1px;
+  }
+
+  .resume-link {
+    color: var(--resume-muted);
+    font-size: 12px;
+    word-break: break-all;
+  }
+
+  .resume-link div {
+    margin-top: 1px;
+  }
+
+  .resume-compact-list li {
+    margin-bottom: 3px;
+  }
+
+  @media (max-width: 720px) {
+    .resume-page {
+      padding: 1.25rem 1rem;
+    }
+
+    .resume-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .resume-project-head {
+      flex-direction: column;
+    }
+  }
+
+  @media print {
+    .resume-page {
+      width: auto;
+      border: none;
+      border-radius: 0;
+      padding: 13mm;
+    }
+  }
+</style>
