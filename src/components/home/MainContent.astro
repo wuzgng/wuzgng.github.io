@@ -1,10 +1,7 @@
 ---
 import { getCollection, getEntry } from "astro:content";
 
-const featuredPostIds = [
-  "2026/03/本人对-vibe-coding-的一些认识以及使用技巧",
-  "2026/05/attention-我们都活在彼此的注意力机制里",
-];
+const featuredPostIds = ["vibe-coding-guide", "attention"];
 
 const featuredProjects = (
   await Promise.all(featuredPostIds.map((id) => getEntry("blog", id)))
