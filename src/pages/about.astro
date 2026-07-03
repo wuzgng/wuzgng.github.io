@@ -4,8 +4,7 @@ import "../styles/global.css";
 import Resume from "../components/about/Resume.astro";
 import Navbar from "../components/layout/Navbar.astro";
 import Sidebar from "../components/layout/Sidebar.astro";
-import SiteClientRouter from "../components/layout/SiteClientRouter.astro";
-import siteIcon from "../assets/site-icon.png";
+import SiteHead from "../components/layout/SiteHead.astro";
 
 const pageTitle = "关于";
 const pageDate = new Date("2026-06-28");
@@ -25,13 +24,7 @@ const tocTitleClass =
 
 <html lang="zh-CN">
   <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/png" href={siteIcon.src} />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <SiteClientRouter />
-    <title>{pageTitle} | 北海</title>
-    <meta name="description" content="关于北海的占位页面" />
+    <SiteHead title="关于" description="关于北海的占位页面" />
   </head>
   <body class="min-h-screen">
     <Navbar />
