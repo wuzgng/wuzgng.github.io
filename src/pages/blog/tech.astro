@@ -2,11 +2,11 @@
 import { getCollection } from "astro:content";
 
 import BlogListLayout from "../../components/blog/BlogListLayout.astro";
-import { blogTagGroups, hasAnyTag, sortPostsByDateDesc } from "../../lib/blog";
+import { hasTag, sortPostsByDateDesc } from "../../lib/blog";
 
 const posts = sortPostsByDateDesc(
   (await getCollection("blog", ({ data }) => !data.draft)).filter((post) =>
-    hasAnyTag(post, blogTagGroups.tech),
+    hasTag(post, "技术"),
   ),
 );
 ---
