@@ -3,9 +3,9 @@
     <header>
       <h1>吴炯林</h1>
       <div class="resume-contact">
-        <div>wuzhguang@163.com</div>
         <div>GitHub: https://github.com/wuzgng</div>
-        <div>Blog: https://wuzgng.github.io</div>
+        <div>Email: wuzhguang@163.com</div>
+        <div>Tel: (+86)190*****850</div>
       </div>
       <div class="resume-summary">
         信息与通信工程硕士，研究方向为深度学习、多模态信号处理与 Transformer 序列建模。具备扎实的算法工程能力和项目落地经验，熟悉大模型提示词工程与实际业务场景应用。
@@ -14,31 +14,12 @@
 
     <div class="resume-layout">
       <section>
-        <h2>技术栈</h2>
-        <div class="resume-tag-group">
-          <div class="resume-tag-title">编程语言</div>
-          <div class="resume-tags">Python, Java, JavaScript</div>
-        </div>
-        <div class="resume-tag-group">
-          <div class="resume-tag-title">深度学习</div>
-          <div class="resume-tags">PyTorch, Transformer (Encoder-Decoder), Multi-head Self-Attention, CNN, GLU, Channel/Spatial Attention</div>
-        </div>
-        <div class="resume-tag-group">
-          <div class="resume-tag-title">信号处理与分析</div>
-          <div class="resume-tags">STFT 时频分析, 分数阶傅里叶变换 (FrFT), 多模态信号处理, 特征提取</div>
-        </div>
-        <div class="resume-tag-group">
-          <div class="resume-tag-title">大模型与工具</div>
-          <div class="resume-tags">LLM/VLM 提示词工程, JSON Schema, 批量自动化测试, Docker</div>
-        </div>
-      </section>
-
-      <section>
         <h2>教育经历</h2>
         <h3>北京航空航天大学</h3>
         <div class="resume-meta">信息与通信工程 | 学术型硕士</div>
         <div class="resume-meta">2022.09 – 2025.06</div>
         <ul class="resume-compact-list">
+          <li>GPA 3.83 / 4.0</li>
           <li>研究方向：深度学习 · 多模态信号处理 · Transformer 序列建模</li>
         </ul>
 
@@ -46,18 +27,8 @@
         <div class="resume-meta">通信工程 | 本科</div>
         <div class="resume-meta">2018.09 – 2022.06</div>
         <ul class="resume-compact-list">
-          <li>GPA 4.06 / 5.0 | CET-6 510 · CET-4 529</li>
-          <li>主修：数据结构 · 高级程序设计 · 单片机与嵌入式系统 · 数字电路 · 信息理论与编码</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2>获奖与荣誉</h2>
-        <ul>
-          <li>APMCM 亚太地区大学生数学建模竞赛 — 量子计算赛道 二等奖（数据分析 · 模型构建 · 算法优化）</li>
-          <li>全国大学生数学竞赛 二等奖、湖北省大学生数学竞赛 二等奖</li>
-          <li>北京航空航天大学学业奖学金</li>
-          <li>武汉理工大学优秀毕业生、校三好学生</li>
+          <li>GPA 3.86 / 4.0 | CET-6 510 · CET-4 529</li>
+          <li>主修：信号与系统 · 电磁场与电磁波 · 单片机与嵌入式系统 · 数字电路 · 信息理论与编码</li>
         </ul>
       </section>
 
@@ -154,6 +125,26 @@
             <li>基于 SRK240 雷达系统开发板完成设备调试，测试多种载波调制方案实现多目标方位检测，撰写标准化调试流程文档。</li>
           </ul>
         </article>
+      </section>
+
+      <section>
+        <h2>获奖与荣誉</h2>
+        <ul>
+          <li>APMCM 亚太地区大学生数学建模竞赛 — 量子计算赛道 二等奖（数据分析 · 模型构建 · 算法优化）</li>
+          <li>全国大学生数学竞赛 二等奖、湖北省大学生数学竞赛 二等奖</li>
+          <li>北京航空航天大学学业奖学金</li>
+          <li>武汉理工大学优秀毕业生、校三好学生</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>个人技能</h2>
+        <div class="resume-skills-list">
+          <div class="resume-skill-item"><span class="resume-skill-label">编程语言</span>Python, Java, JavaScript</div>
+          <div class="resume-skill-item"><span class="resume-skill-label">深度学习</span>PyTorch, Transformer, Multi-head Self-Attention, CNN, GLU, Channel/Spatial Attention</div>
+          <div class="resume-skill-item"><span class="resume-skill-label">信号处理</span>STFT 时频分析, 分数阶傅里叶变换, 多模态信号处理, 特征提取</div>
+          <div class="resume-skill-item"><span class="resume-skill-label">大模型与工具</span>LLM/VLM 提示词工程, JSON Schema, 批量自动化测试, Docker</div>
+        </div>
       </section>
     </div>
   </main>
@@ -291,28 +282,35 @@
     line-height: 1.55;
   }
 
-  .resume-tag-group {
-    display: grid;
-    grid-template-columns: minmax(5.6rem, 0.35fr) minmax(0, 1fr);
-    gap: 0.65rem;
-    align-items: start;
-    margin-bottom: 0.55rem;
-    border: 1px solid var(--resume-line);
-    border-radius: 0.7rem;
-    background: var(--resume-soft);
-    padding: 0.62rem 0.75rem;
-  }
-
-  .resume-tag-title {
-    margin-bottom: 0;
-    color: var(--resume-ink);
-    font-weight: 700;
-    line-height: 1.45;
-  }
-
   .resume-tags {
     color: var(--resume-muted);
+    font-size: 0.82rem;
     line-height: 1.55;
+  }
+
+  .resume-skills-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .resume-skill-item {
+    font-size: 0.89rem;
+    line-height: 1.65;
+    color: var(--resume-muted);
+  }
+
+  .resume-skill-label {
+    display: inline-block;
+    min-width: 5.6rem;
+    margin-right: 0.35rem;
+    color: var(--resume-ink);
+    font-weight: 600;
+  }
+
+  .resume-skill-label::after {
+    content: "：";
+    font-weight: 400;
   }
 
   .resume ul {
@@ -400,11 +398,6 @@
       border-radius: 0.65rem;
     }
 
-    .resume-tag-group {
-      grid-template-columns: 1fr;
-      gap: 0.2rem;
-    }
-
     .resume-project-head {
       flex-direction: column;
       gap: 0.25rem;
@@ -431,8 +424,7 @@
     }
 
     .resume-contact > div,
-    .resume-summary,
-    .resume-tag-group {
+    .resume-summary {
       background: transparent;
     }
 
