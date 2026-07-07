@@ -5,7 +5,7 @@ export type BlogPost = CollectionEntry<"blog">;
 export const blogTagGroups = {
   tech: ["技术交流", "项目分享"],
   life: ["日常分享", "其他"],
-  moments: ["思考"],
+  moments: ["项目分享", "经验分享"],
 } as const;
 
 export const sortPostsByDateDesc = (posts: BlogPost[]) =>

@@ -4,19 +4,7 @@ import { getCollection } from "astro:content";
 const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime(),
 );
-const tags = [...new Set(posts.flatMap((post) => post.data.tags))].sort((a, b) => a.localeCompare(b, "zh-CN"));
-
-const tagPageMap: Record<string, string> = {
-  "技术交流": "/blog/tech/",
-  "项目分享": "/blog/tech/",
-  "日常分享": "/blog/life/",
-  "其他": "/blog/life/",
-  "思考": "/blog/moments/",
-};
-
-function getTagHref(tag: string): string | null {
-  return tagPageMap[tag] ?? null;
-}
+const tags = [...new Set(posts.flatMap((post) => post.data.tags))];
 
 const siteStartYear =
   posts.length > 0
@@ -38,8 +26,6 @@ const cardClass =
   "rounded-card border border-border bg-card p-4 backdrop-blur-lg transition duration-200 hover:-translate-y-px hover:border-primary/30 hover:bg-white/82 dark:border-border-dark dark:bg-card-dark dark:hover:border-primary/30 dark:hover:bg-white/7";
 const sectionTitleClass =
   "mb-3 text-xs font-bold uppercase leading-none tracking-[0.12em] text-text-muted dark:text-text-muted-dark";
-const tagClass =
-  "rounded-pill border border-primary/16 bg-primary/8 px-2 py-1 text-xs font-medium leading-tight text-text-secondary transition-colors duration-200 hover:border-accent/28 hover:bg-accent/9 hover:text-text-primary dark:border-primary/18 dark:bg-primary/10 dark:text-text-secondary-dark dark:hover:border-accent/30 dark:hover:bg-accent/12 dark:hover:text-text-primary-dark";
 ---
 
 <aside class="grid w-full content-start gap-4 text-text-primary dark:text-text-primary-dark" aria-label="网站辅助信息">
@@ -55,28 +41,6 @@ const tagClass =
         ))
       }
     </div>
-  </section>
-
-  <section class={cardClass} aria-labelledby="tag-cloud-title">
-    <h2 id="tag-cloud-title" class={sectionTitleClass}>文章标签</h2>
-    {
-      tags.length > 0 ? (
-        <div class="flex flex-wrap gap-2" aria-label="文章标签">
-          {tags.map((tag) => {
-            const href = getTagHref(tag);
-            return href ? (
-              <a class={tagClass} href={href} style="text-decoration: none;">{tag}</a>
-            ) : (
-              <span class={tagClass}>{tag}</span>
-            );
-          })}
-        </div>
-      ) : (
-        <p class="m-0 text-sm leading-6 text-text-secondary dark:text-text-secondary-dark">
-          暂无标签
-        </p>
-      )
-    }
   </section>
 
   <section class={cardClass} aria-labelledby="recent-updates-title">
