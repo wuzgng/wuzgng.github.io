@@ -69,4 +69,4 @@ tags: ["技术交流", "项目讲解"]
 
 面向 AI 时代，代码的生产成本会越来越低，但理解问题、定义问题、以及在复杂约束中做取舍的能力，会变得越来越重要。
 
-> 项目地址：[asJEI/PR-Review](https://github.com/asJEI/PR-Review)
+> 项目地址：[wuzgng/PR-Review](https://github.com/wuzgng/PR-Review)

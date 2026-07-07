@@ -16,7 +16,7 @@ interface Props {
   pageTitle?: string;
 }
 
-const { posts, title, eyebrow, description, pageTitle = `${title} | 北海` } = Astro.props;
+const { posts, title, eyebrow, description, pageTitle = `${title} | Ng` } = Astro.props;
 
 const formatDate = (date: Date) =>
   new Intl.DateTimeFormat("zh-CN", {

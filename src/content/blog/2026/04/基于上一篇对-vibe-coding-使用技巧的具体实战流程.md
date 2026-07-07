@@ -192,4 +192,4 @@ tags: ["技术交流", "经验分享"]
 
 注意：本教程所演示的内容仅供参考和学习，不涉及任何商业元素
 
-> 项目仓库：[https://github.com/asJEI/Multi-platform-video-downloader](https://github.com/asJEI/Multi-platform-video-downloader)
+> 项目仓库：[https://github.com/wuzgng/Multi-platform-video-downloader](https://github.com/wuzgng/Multi-platform-video-downloader)
