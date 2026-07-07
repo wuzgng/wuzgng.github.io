@@ -5,6 +5,19 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime(),
 );
 const tags = [...new Set(posts.flatMap((post) => post.data.tags))].sort((a, b) => a.localeCompare(b, "zh-CN"));
+
+const tagPageMap: Record<string, string> = {
+  "技术交流": "/blog/tech/",
+  "项目分享": "/blog/tech/",
+  "日常分享": "/blog/life/",
+  "其他": "/blog/life/",
+  "思考": "/blog/moments/",
+};
+
+function getTagHref(tag: string): string | null {
+  return tagPageMap[tag] ?? null;
+}
+
 const siteStartYear =
   posts.length > 0
     ? String(Math.min(...posts.map((post) => post.data.date.getFullYear())))
@@ -49,7 +62,14 @@ const tagClass =
     {
       tags.length > 0 ? (
         <div class="flex flex-wrap gap-2" aria-label="文章标签">
-          {tags.map((tag) => <span class={tagClass}>{tag}</span>)}
+          {tags.map((tag) => {
+            const href = getTagHref(tag);
+            return href ? (
+              <a class={tagClass} href={href} style="text-decoration: none;">{tag}</a>
+            ) : (
+              <span class={tagClass}>{tag}</span>
+            );
+          })}
         </div>
       ) : (
         <p class="m-0 text-sm leading-6 text-text-secondary dark:text-text-secondary-dark">

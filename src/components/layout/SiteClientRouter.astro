@@ -33,22 +33,6 @@ import { ClientRouter } from "astro:transitions";
   applyTheme();
   document.addEventListener("astro:page-load", applyTheme);
 
-  const cleanupOrphanedMusicPlayers = () => {
-    const sidebar = document.querySelector('aside[aria-label="个人信息侧边栏"]');
-    const players = document.querySelectorAll('[aria-label="音乐播放器"]');
-
-    players.forEach((player) => {
-      if (sidebar?.contains(player)) {
-        return;
-      }
-
-      player.closest("section")?.remove();
-    });
-  };
-
-  cleanupOrphanedMusicPlayers();
-  document.addEventListener("astro:page-load", cleanupOrphanedMusicPlayers);
-
   document.addEventListener("click", (event) => {
     const toggle = event.target instanceof Element ? event.target.closest("[data-theme-toggle]") : null;
     if (!toggle) {

@@ -3,9 +3,9 @@ import type { CollectionEntry } from "astro:content";
 export type BlogPost = CollectionEntry<"blog">;
 
 export const blogTagGroups = {
-  tech: ["技术交流", "项目讲解"],
+  tech: ["技术交流", "项目分享"],
   life: ["日常分享", "其他"],
-  moments: ["幽微"],
+  moments: ["思考"],
 } as const;
 
 export const sortPostsByDateDesc = (posts: BlogPost[]) =>
