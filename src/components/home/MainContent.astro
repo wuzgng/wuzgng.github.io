@@ -1,7 +1,7 @@
 ---
 import { getCollection, getEntry } from "astro:content";
 
-const featuredPostIds = ["vibe-coding-guide", "attention"];
+const featuredPostIds = ["ai-code-review", "distilling-myself"];
 
 const featuredProjects = (
   await Promise.all(featuredPostIds.map((id) => getEntry("blog", id)))
