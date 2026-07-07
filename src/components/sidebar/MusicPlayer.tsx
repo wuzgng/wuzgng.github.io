@@ -10,11 +10,11 @@ type Track = {
 
 declare global {
   interface Window {
-    __beihaiActiveAudio?: HTMLAudioElement;
+    __ngActiveAudio?: HTMLAudioElement;
   }
 }
 
-const STORAGE_KEY = "beihai-music-session";
+const STORAGE_KEY = "ng-music-session";
 const BACKGROUND_VOLUME = 0.25;
 
 type MusicSession = {
@@ -213,7 +213,7 @@ export default function MusicPlayer() {
 
     let isResumeArmed = false;
     const playAudio = async () => {
-      const activeAudio = window.__beihaiActiveAudio;
+      const activeAudio = window.__ngActiveAudio;
 
       if (activeAudio && activeAudio !== audio && !activeAudio.paused) {
         activeAudio.pause();
@@ -223,7 +223,7 @@ export default function MusicPlayer() {
         await audio.play();
       }
 
-      window.__beihaiActiveAudio = audio;
+      window.__ngActiveAudio = audio;
     };
     const resumeOnInteraction = () => {
       document.removeEventListener("pointerdown", resumeOnInteraction);
@@ -321,8 +321,8 @@ export default function MusicPlayer() {
       audio.removeEventListener("play", handlePlay);
       audio.removeEventListener("pause", handlePause);
 
-      if (window.__beihaiActiveAudio === audio) {
-        window.__beihaiActiveAudio = undefined;
+      if (window.__ngActiveAudio === audio) {
+        window.__ngActiveAudio = undefined;
       }
 
       audioRef.current = null;
@@ -354,14 +354,14 @@ export default function MusicPlayer() {
     }
 
     try {
-      const activeAudio = window.__beihaiActiveAudio;
+      const activeAudio = window.__ngActiveAudio;
 
       if (activeAudio && activeAudio !== audio && !activeAudio.paused) {
         activeAudio.pause();
       }
 
       await audio.play();
-      window.__beihaiActiveAudio = audio;
+      window.__ngActiveAudio = audio;
     } catch {
       setIsPlaying(false);
     }

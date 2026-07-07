@@ -53,12 +53,12 @@ const tagClass =
     <section class={cardClass} data-sidebar-music aria-labelledby="music-player-title">
       <h3 id="music-player-title" class="sr-only">音乐播放器</h3>
       {musicHydration === "all" && (
-        <MusicPlayer client:load transition:persist="beihai-music-player" transition:persist-props />
+        <MusicPlayer client:load transition:persist="ng-music-player" transition:persist-props />
       )}
       {musicHydration === "desktop" && (
         <MusicPlayer
           client:media="(min-width: 821px)"
-          transition:persist="beihai-music-player"
+          transition:persist="ng-music-player"
           transition:persist-props
         />
       )}
