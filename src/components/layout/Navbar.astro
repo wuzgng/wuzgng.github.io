@@ -6,11 +6,11 @@ import { sortPostsByDateDesc } from "../../lib/blog";
 
 const navItems = [
   { label: "首页", href: "/" },
-  { label: "所有文章", href: "/blog" },
-  { label: "技术", href: "/blog/tech" },
-  { label: "生活", href: "/blog/life" },
-  { label: "幽微", href: "/blog/moments" },
-  { label: "关于", href: "/about" },
+  { label: "所有文章", href: "/blog/" },
+  { label: "技术", href: "/blog/tech/" },
+  { label: "生活", href: "/blog/life/" },
+  { label: "幽微", href: "/blog/moments/" },
+  { label: "关于", href: "/about/" },
 ];
 
 const searchPosts = sortPostsByDateDesc(await getCollection("blog", ({ data }) => !data.draft)).map((post) => ({
